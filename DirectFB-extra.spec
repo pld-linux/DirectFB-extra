@@ -6,23 +6,23 @@
 Summary:	Additional providers and drivers for DirectFB
 Summary(pl):	DirectFB - dodatkowe wtyczki i sterowniki do DirectFB
 Name:		DirectFB-extra
-Version:	0.9.21
+Version:	0.9.22
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://www.directfb.org/download/DirectFB-extra/%{name}-%{version}.tar.gz
-# Source0-md5:	119f47a5c8684ea1c291002629d50348
+# Source0-md5:	0d9fb91726b3961917c1be3ef0933ced
 Patch0:		%{name}-acfix.patch
 URL:		http://www.directfb.org/
 BuildRequires:	DirectFB-devel >= 1:%{version}
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-%{?with_flash:BuildRequires:	flash-devel >= 0.4.10-5}
+%{?with_flash:BuildRequires:	gplflash-devel >= 0.4.10-5}
 BuildRequires:	imlib2-devel
 %{?with_mpg:BuildRequires:	libmpeg3-devel}
 BuildRequires:	libtool
 BuildRequires:	openquicktime-devel
-BuildRequires:	xine-lib-devel >= 2:1.0-0.rc2
+BuildRequires:	xine-lib-devel >= 2:1.0-0.rc3
 BuildRequires:	pkgconfig >= 1:0.9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -114,7 +114,7 @@ Summary:	XINE video provider for DirectFB
 Summary(pl):	DirectFB - wtyczka dostarczaj±ca obraz XINE
 Group:		Libraries
 %requires_eq	DirectFB
-Requires:	xine-lib >= 2:1.0-0.rc2
+Requires:	xine-lib >= 2:1.0-0.rc3
 
 %description -n DirectFB-video-xine
 This package contains video provider for DirectFB which uses XINE
@@ -130,7 +130,7 @@ Summary:	DirectFB-based XINE UI
 Summary(pl):	Interfejs u¿ytkownika XINE oparty na DirectFB
 Group:		Applications/Multimedia
 %requires_eq	DirectFB
-Requires:	xine-lib >= 2:1.0-0.rc2
+Requires:	xine-lib >= 2:1.0-0.rc3
 
 %description -n xine-ui-dfb
 DirectFB-based XINE UI. This package contains also DirectFB video
