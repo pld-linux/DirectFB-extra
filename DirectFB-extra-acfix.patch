@@ -49,3 +49,14 @@
    DFB_CFLAGS="$DFB_CFLAGS $CFLAGS"
  fi
  
+--- DirectFB-extra-0.9.13.orig/interfaces/IDirectFBImageProvider/Makefile.am	Thu Jan 10 20:06:09 2002
++++ DirectFB-extra-0.9.13/interfaces/IDirectFBImageProvider/Makefile.am	Thu Nov  7 12:21:33 2002
+@@ -3,7 +3,7 @@
+ idirectfbimageproviderdir = $(MODULEDIR)/interfaces/IDirectFBImageProvider
+ 
+ 
+-CFLAGS = $(DFB_CFLAGS) -DDATADIR=\"@DATADIR@\"
++CFLAGS = $(DFB_CFLAGS) -DDATADIR=\"@DATADIR@\" $(IMLIB2_INCLUDES)
+ 
+ if IMLIB2
+ IMLIB2_PROVIDER = libidirectfbimageprovider_imlib2.la
