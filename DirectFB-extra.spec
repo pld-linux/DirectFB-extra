@@ -6,13 +6,14 @@ Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://www.directfb.org/download/DirectFB-extra/%{name}-%{version}.tar.gz
+Patch0:		%{name}-acfix.patch
 URL:		http://www.directfb.org/
 BuildRequires:	DirectFB-devel >= %{version}
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	imlib2-devel
+#BuildRequires:	imlib2-devel
 BuildRequires:	openquicktime-devel
-BuildRequires:	pkgconfig
+BuildRequires:	pkgconfig >= 0.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		dfbdir		%(pkg-config --variable=moduledir directfb-internal)
@@ -56,13 +57,15 @@ OpenQuicktime.
 
 %prep
 %setup -q
+%patch -p1
 
 %build
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
+%configure \
+	--disable-imlib2
 
 %{__make} MODULEDIR=%{dfbdir}
 
@@ -76,10 +79,10 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -n DirectFB-image-imlib2
-%defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README
-%attr(755,root,root) %{dfbdir}/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_imlib2.??
+#%files -n DirectFB-image-imlib2
+#%defattr(644,root,root,755)
+#%doc AUTHORS ChangeLog README
+#%attr(755,root,root) %{dfbdir}/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_imlib2.??
 
 %files -n DirectFB-video-openquicktime
 %defattr(644,root,root,755)
