@@ -22,7 +22,7 @@ BuildRequires:	automake
 BuildRequires:	imlib2-devel
 BuildRequires:	libtool
 BuildRequires:	openquicktime-devel
-BuildRequires:	pkgconfig >= 0.5
+BuildRequires:	pkgconfig >= 1:0.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		dfbdir		%(pkg-config --variable=moduledir directfb-internal)
