@@ -1,26 +1,24 @@
---- DirectFB-extra-0.9.9/configure.in.orig	Thu Jan 10 19:49:32 2002
-+++ DirectFB-extra-0.9.9/configure.in	Wed Nov  6 23:40:30 2002
-@@ -114,6 +114,8 @@
- #
- # OpenQuicktime check
- #
-+AC_ARG_ENABLE(openquicktime, [  --disable-openquicktime     disable openquicktime plugin [default=yes]],, enable_openquicktime=yes)
-+if test "x$enable_openquicktime" = xyes ; then
- AC_CHECK_LIB(openquicktime, quicktime_open, openquicktime="yes", openquicktime="no")
- if test "x$openquicktime" = xyes; then
-   OPENQUICKTIME_LIBS="-lopenquicktime"
-@@ -127,7 +129,9 @@
- fi 
+--- DirectFB-extra-0.9.16/configure.in.orig	Mon Jan 13 16:19:59 2003
++++ DirectFB-extra-0.9.16/configure.in	Fri Jan 17 22:08:03 2003
+@@ -101,7 +101,7 @@
+ DFB_CFLAGS="$DFB_CFLAGS $DFB_INTERNAL_CFLAGS -DREENTRANT"
  
- AC_SUBST(OPENQUICKTIME_LIBS)
--
-+else
-+	openquicktime=no
-+fi
- AM_CONDITIONAL(OPENQUICKTIME, test "x$openquicktime" = xyes)
+ if test "x$GCC" = xyes; then
+-  DFB_CFLAGS="$DFB_CFLAGS -O3 -fexpensive-optimizations -ffast-math -Wall"
++  DFB_CFLAGS="$DFB_CFLAGS -ffast-math -Wall"
+ fi
  
  
-@@ -135,6 +139,8 @@
+@@ -113,8 +113,6 @@
+ if test "x$enable_debug" = xyes; then
+     AC_DEFINE(DFB_DEBUG, 1, [Define to 1 to enable debugging support.])
+     DFB_CFLAGS="$DFB_CFLAGS -g3"
+-else
+-    DFB_CFLAGS="$DFB_CFLAGS -g0"
+ fi
+ AM_CONDITIONAL(ENABLE_DEBUG, test "x$enable_debug" = xyes)
+ 
+@@ -123,6 +121,8 @@
  # Imlib2 check
  #
  
@@ -29,7 +27,7 @@
  AC_PATH_PROG(IMLIB2_CONFIG, imlib2-config, no)
  if test "x$IMLIB2_CONFIG" = xno; then
    AC_MSG_WARN([*** Imlib2 library not found, building without Imlib2 support ***])
-@@ -147,7 +153,9 @@
+@@ -135,13 +135,17 @@
  
  AC_SUBST(IMLIB2_LIBS)
  AC_SUBST(IMLIB2_INCLUDES)
@@ -40,23 +38,45 @@
  AM_CONDITIONAL(IMLIB2, test "x$imlib2" = xyes)
  
  
-@@ -161,7 +169,7 @@
- AM_CONDITIONAL(ENABLE_DEBUG, test "x$enable_debug" = xyes)
+ #
+ # OpenQuicktime check
+ #
++AC_ARG_ENABLE(openquicktime, [  --disable-openquicktime     disable openquicktime plugin [default=yes]],, enable_openquicktime=yes)
++if test "x$enable_openquicktime" = xyes ; then
+ AC_CHECK_LIB(openquicktime, quicktime_open, openquicktime="yes", openquicktime="no")
+ if test "x$openquicktime" = xyes; then
+   OPENQUICKTIME_LIBS="-lopenquicktime"
+@@ -155,7 +159,9 @@
+ fi 
+ 
+ AC_SUBST(OPENQUICKTIME_LIBS)
+-
++else
++	openquicktime=no
++fi
+ AM_CONDITIONAL(OPENQUICKTIME, test "x$openquicktime" = xyes)
  
  
--if test x$cflags_set != xset ; then
+@@ -223,7 +229,10 @@
+ # Honor aclocal flags
+ ACLOCAL="$ACLOCAL $ACLOCAL_FLAGS"
+ 
+-
 +if test "x$cflags_set" != "xset" ; then
-   DFB_CFLAGS="$DFB_CFLAGS $CFLAGS"
- fi
- 
---- DirectFB-extra-0.9.13.orig/interfaces/IDirectFBImageProvider/Makefile.am	Thu Jan 10 20:06:09 2002
-+++ DirectFB-extra-0.9.13/interfaces/IDirectFBImageProvider/Makefile.am	Thu Nov  7 12:21:33 2002
++	DFB_CFLAGS="$DFB_CFLAGS $CFLAGS"
++fi
++    
+ AC_SUBST(DFB_CFLAGS)
+ AC_SUBST(DFB_LIBS)
+ AC_SUBST(DATADIR)
+--- DirectFB-extra-0.9.16/interfaces/IDirectFBImageProvider/Makefile.am.orig	Mon Oct 28 16:54:28 2002
++++ DirectFB-extra-0.9.16/interfaces/IDirectFBImageProvider/Makefile.am	Fri Jan 17 22:08:45 2003
 @@ -3,7 +3,7 @@
  idirectfbimageproviderdir = $(MODULEDIR)/interfaces/IDirectFBImageProvider
  
  
--CFLAGS = $(DFB_CFLAGS) -DDATADIR=\"@DATADIR@\"
-+CFLAGS = $(DFB_CFLAGS) -DDATADIR=\"@DATADIR@\" $(IMLIB2_INCLUDES)
+-AM_CFLAGS = $(DFB_CFLAGS) -DDATADIR=\"@DATADIR@\"
++AM_CFLAGS = $(DFB_CFLAGS) -DDATADIR=\"@DATADIR@\" $(IMLIB2_INCLUDES)
  
  if IMLIB2
  IMLIB2_PROVIDER = libidirectfbimageprovider_imlib2.la
