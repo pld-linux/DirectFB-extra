@@ -6,7 +6,7 @@ Summary:	Additional providers and drivers for DirectFB
 Summary(pl):	DirectFB - dodatkowe wtyczki i sterowniki do DirectFB
 Name:		DirectFB-extra
 Version:	0.9.16
-Release:	2
+Release:	3
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://www.directfb.org/download/DirectFB-extra/%{name}-%{version}.tar.gz
@@ -84,6 +84,7 @@ Ten pakiet zawiera wtyczkê dla DirectFB dostarczaj±c± obraz SWF
 %patch1 -p1
 
 %build
+cp -f /usr/share/automake/config.sub .
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
