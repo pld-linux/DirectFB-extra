@@ -14,7 +14,7 @@ Source0:	http://www.directfb.org/download/DirectFB-extra/%{name}-%{version}.tar.
 # Source0-md5:	119f47a5c8684ea1c291002629d50348
 Patch0:		%{name}-acfix.patch
 URL:		http://www.directfb.org/
-BuildRequires:	DirectFB-devel >= %{version}
+BuildRequires:	DirectFB-devel >= 1:%{version}
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 %{?with_flash:BuildRequires:	flash-devel >= 0.4.10-5}
