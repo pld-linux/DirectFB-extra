@@ -23,7 +23,7 @@ BuildRequires:	imlib2-devel
 BuildRequires:	libtool
 BuildRequires:	openquicktime-devel
 BuildRequires:	xine-lib-devel >= 2:1.0-0.rc2
-BuildRequires:	pkgconfig >= 1:0.5
+BuildRequires:	pkgconfig >= 1:0.9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		dfbdir		%(pkg-config --variable=moduledir directfb-internal)
