@@ -1,22 +1,24 @@
 #
 # Conditional build:
-# _without_flash	- don't build FLASH video provider
+%bcond_without	flash	# don't build FLASH video provider
 #
 Summary:	Additional providers and drivers for DirectFB
 Summary(pl):	DirectFB - dodatkowe wtyczki i sterowniki do DirectFB
 Name:		DirectFB-extra
 Version:	0.9.16
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://www.directfb.org/download/DirectFB-extra/%{name}-%{version}.tar.gz
 # Source0-md5:	e5084d213dfd309987d139f816930340
 Patch0:		%{name}-acfix.patch
+Patch1:		%{name}-updates.patch
 URL:		http://www.directfb.org/
-BuildRequires:	DirectFB-devel >= %{version}
+#BuildRequires:	DirectFB-devel >= %{version}
+BuildRequires:	DirectFB-devel >= 0.9.20
 BuildRequires:	autoconf
 BuildRequires:	automake
-%{!?_without_flash:BuildRequires:	flash-devel >= 0.4.10-5}
+%{?with_flash:BuildRequires:	flash-devel >= 0.4.10-5}
 BuildRequires:	imlib2-devel
 BuildRequires:	libtool
 BuildRequires:	openquicktime-devel
@@ -78,7 +80,8 @@ Ten pakiet zawiera wtyczkê dla DirectFB dostarczaj±c± obraz SWF
 
 %prep
 %setup -q
-%patch -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -91,9 +94,10 @@ CPPFLAGS="-I/usr/X11R6/include"
 LDFLAGS="%{rpmldflags} -L/usr/X11R6/lib"
 %configure \
 	--disable-avifile \
-	%{?_without_flash:--disable-flash}
+	%{!?with_flash:--disable-flash}
 
-%{__make} MODULEDIR=%{dfbdir}
+%{__make} \
+	MODULEDIR=%{dfbdir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -102,6 +106,8 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	MODULEDIR=%{dfbdir}
 
+rm -f $RPM_BUILD_ROOT%{dfbdir}/interfaces/*/*.la
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -109,17 +115,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{dfbdir}/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_imlib2.so
-%{dfbdir}/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_imlib2.la
 
 %files -n DirectFB-video-openquicktime
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{dfbdir}/interfaces/IDirectFBVideoProvider/libidirectfbvideoprovider_openquicktime.so
-%{dfbdir}/interfaces/IDirectFBVideoProvider/libidirectfbvideoprovider_openquicktime.la
 
-%if 0%{!?_without_flash:1}
+%if %{with flash}
 %files -n DirectFB-video-swf
 %defattr(644,root,root,755)
 %attr(755,root,root) %{dfbdir}/interfaces/IDirectFBVideoProvider/libidirectfbvideoprovider_swf.so
-%{dfbdir}/interfaces/IDirectFBVideoProvider/libidirectfbvideoprovider_swf.la
 %endif
