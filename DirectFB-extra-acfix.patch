@@ -30,14 +30,14 @@
  AC_SUBST(DFB_CFLAGS)
  AC_SUBST(DFB_LIBS)
  AC_SUBST(DATADIR)
---- DirectFB-extra-0.9.16/interfaces/IDirectFBImageProvider/Makefile.am.orig	Mon Oct 28 16:54:28 2002
-+++ DirectFB-extra-0.9.16/interfaces/IDirectFBImageProvider/Makefile.am	Fri Jan 17 22:08:45 2003
+--- DirectFB-extra-0.9.23/interfaces/IDirectFBImageProvider/Makefile.am.orig	Mon Oct 28 16:54:28 2002
++++ DirectFB-extra-0.9.23/interfaces/IDirectFBImageProvider/Makefile.am	Fri Jan 17 22:08:45 2003
 @@ -3,7 +3,7 @@
  idirectfbimageproviderdir = $(MODULEDIR)/interfaces/IDirectFBImageProvider
  
  
--AM_CFLAGS = $(DFB_CFLAGS) -DDATADIR=\"@DATADIR@\"
-+AM_CFLAGS = $(DFB_CFLAGS) -DDATADIR=\"@DATADIR@\" $(IMLIB2_INCLUDES)
+-AM_CFLAGS = $(DFB_CFLAGS) $(SVG_CFLAGS) -DDATADIR=\"@DATADIR@\"
++AM_CFLAGS = $(DFB_CFLAGS) $(SVG_CFLAGS) -DDATADIR=\"@DATADIR@\" $(IMLIB2_INCLUDES)
  
  if IMLIB2
  IMLIB2_PROVIDER = libidirectfbimageprovider_imlib2.la
