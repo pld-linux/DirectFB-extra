@@ -6,24 +6,27 @@
 Summary:	Additional providers and drivers for DirectFB
 Summary(pl):	DirectFB - dodatkowe wtyczki i sterowniki do DirectFB
 Name:		DirectFB-extra
-Version:	0.9.22
+Version:	0.9.23
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://www.directfb.org/download/DirectFB-extra/%{name}-%{version}.tar.gz
-# Source0-md5:	0d9fb91726b3961917c1be3ef0933ced
+# Source0-md5:	6ac8776132c745d03573c1956e4cf59e
 Patch0:		%{name}-acfix.patch
 URL:		http://www.directfb.org/
 BuildRequires:	DirectFB-devel >= 1:%{version}
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
+BuildRequires:	FusionSound-devel >= 0.9.18
 %{?with_flash:BuildRequires:	gplflash-devel >= 0.4.10-5}
 BuildRequires:	imlib2-devel
 %{?with_mpg:BuildRequires:	libmpeg3-devel}
+BuildRequires:	libsvg-cairo-devel >= 0.1.6
 BuildRequires:	libtool
 BuildRequires:	openquicktime-devel
-BuildRequires:	xine-lib-devel >= 2:1.0-0.rc3
 BuildRequires:	pkgconfig >= 1:0.9
+BuildRequires:	swfdec-devel >= 0.3.0
+BuildRequires:	xine-lib-devel >= 2:1.0-0.rc3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		dfbdir		%(pkg-config --variable=moduledir directfb-internal)
@@ -65,6 +68,19 @@ formats (both ASCII and RAW).
 %description -n DirectFB-image-pnm -l pl
 Ten pakiet zawiera wtyczkê dla DirectFB dostarczaj±c± grafikê PNM.
 Obs³uguje formaty PBM, PGM i PPM (zarówno ASCII, jak i binarne).
+
+%package -n DirectFB-image-svg
+Summary:	SVG image provider for DirectFB
+Summary(pl):	DirectFB - wtyczka dostarczaj±ca grafikê SVG
+Group:		Libraries
+%requires_eq	DirectFB
+
+%description -n DirectFB-image-svg
+This package contains SVG image provider using Cairo library.
+
+%description -n DirectFB-image-svg -l pl
+Ten pakiet zawiera wtyczkê dla DirectFB dostarczaj±c± grafikê SVG
+przy u¿yciu biblioteki Cairo.
 
 %package -n DirectFB-video-libmpeg3
 Summary:	MPEG video provider for DirectFB
@@ -108,6 +124,20 @@ DirectFB. It uses flash library.
 %description -n DirectFB-video-swf -l pl
 Ten pakiet zawiera wtyczkê dla DirectFB dostarczaj±c± obraz SWF
 (ShockWave Flash) przy u¿yciu biblioteki flash.
+
+%package -n DirectFB-video-swfdec
+Summary:	ShockWave Flash video provider for DirectFB
+Summary(pl):	DirectFB - wtyczka dostarczaj±ca obraz ShockWave Flash
+Group:		Libraries
+%requires_eq	DirectFB
+
+%description -n DirectFB-video-swfdec
+This package contains SWF (ShockWave Flash) video provider for
+DirectFB. It uses swfdec library.
+
+%description -n DirectFB-video-swfdec -l pl
+Ten pakiet zawiera wtyczkê dla DirectFB dostarczaj±c± obraz SWF
+(ShockWave Flash) przy u¿yciu biblioteki swfdec.
 
 %package -n DirectFB-video-xine
 Summary:	XINE video provider for DirectFB
@@ -154,7 +184,9 @@ CPPFLAGS="-I/usr/include/libmpeg3"
 %configure \
 	--disable-avifile \
 	%{!?with_flash:--disable-flash} \
-	%{!?with_mpg:--disable-libmpeg3}
+	%{!?with_mpg:--disable-libmpeg3} \
+	--enable-svg \
+	--enable-swfdec
 
 %{__make} \
 	MODULEDIR=%{dfbdir}
@@ -182,6 +214,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc ChangeLog README
 %attr(755,root,root) %{dfbdir}/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_pnm.so
 
+%files -n DirectFB-image-svg
+%defattr(644,root,root,755)
+%doc ChangeLog README
+%attr(755,root,root) %{dfbdir}/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_svg.so
+
 %files -n DirectFB-video-openquicktime
 %defattr(644,root,root,755)
 %doc ChangeLog README
@@ -200,6 +237,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc ChangeLog README
 %attr(755,root,root) %{dfbdir}/interfaces/IDirectFBVideoProvider/libidirectfbvideoprovider_swf.so
 %endif
+
+%files -n DirectFB-video-swfdec
+%defattr(644,root,root,755)
+%doc ChangeLog README
+%attr(755,root,root) %{dfbdir}/interfaces/IDirectFBVideoProvider/libidirectfbvideoprovider_swfdec.so
 
 %files -n DirectFB-video-xine
 %defattr(644,root,root,755)
