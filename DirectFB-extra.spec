@@ -6,18 +6,19 @@
 Summary:	Additional providers and drivers for DirectFB
 Summary(pl):	DirectFB - dodatkowe wtyczki i sterowniki do DirectFB
 Name:		DirectFB-extra
-Version:	0.9.23
+Version:	0.9.25
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://www.directfb.org/download/DirectFB-extra/%{name}-%{version}.tar.gz
-# Source0-md5:	6ac8776132c745d03573c1956e4cf59e
+# Source0-md5:	2acb95b87adf0feefd282ac29cd72ab2
 Patch0:		%{name}-acfix.patch
 URL:		http://www.directfb.org/
 BuildRequires:	DirectFB-devel >= 1:%{version}
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	FusionSound-devel >= 0.9.18
+BuildRequires:	FusionSound-devel >= 0.9.25
+BuildRequires:	ffmpeg-devel
 %{?with_flash:BuildRequires:	gplflash-devel >= 0.4.10-5}
 BuildRequires:	imlib2-devel
 %{?with_mpg:BuildRequires:	libmpeg3-devel}
@@ -81,6 +82,19 @@ This package contains SVG image provider using Cairo library.
 %description -n DirectFB-image-svg -l pl
 Ten pakiet zawiera wtyczkê dla DirectFB dostarczaj±c± grafikê SVG
 przy u¿yciu biblioteki Cairo.
+
+%package -n DirectFB-video-ffmpeg
+Summary:	FFmpeg video provider for DirectFB
+Summary(pl):	DirectFB - wtyczka dostarczaj±ca obraz FFmpeg
+Group:		Libraries
+%requires_eq	DirectFB
+
+%description -n DirectFB-video-ffmpeg
+DirectFB video provider using FFmpeg codecs.
+
+%description -n DirectFB-video-ffmpeg -l pl
+Ten pakiet zawiera wtyczkê dla DirectFB dostarczajac± obraz przy
+u¿yciu kodeków FFmpeg.
 
 %package -n DirectFB-video-libmpeg3
 Summary:	MPEG video provider for DirectFB
@@ -223,6 +237,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog README
 %attr(755,root,root) %{dfbdir}/interfaces/IDirectFBVideoProvider/libidirectfbvideoprovider_openquicktime.so
+
+%files -n DirectFB-video-ffmpeg
+%defattr(644,root,root,755)
+%doc ChangeLog README
+%attr(755,root,root) %{dfbdir}/interfaces/IDirectFBVideoProvider/libidirectfbvideoprovider_ffmpeg.so
 
 %if %{with mpg}
 %files -n DirectFB-video-libmpeg3
