@@ -7,7 +7,7 @@ Summary:	Additional providers and drivers for DirectFB
 Summary(pl):	DirectFB - dodatkowe wtyczki i sterowniki do DirectFB
 Name:		DirectFB-extra
 Version:	0.9.23
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://www.directfb.org/download/DirectFB-extra/%{name}-%{version}.tar.gz
@@ -144,7 +144,7 @@ Summary:	XINE video provider for DirectFB
 Summary(pl):	DirectFB - wtyczka dostarczaj±ca obraz XINE
 Group:		Libraries
 %requires_eq	DirectFB
-Requires:	xine-lib >= 2:1.0-0.rc3
+%requires_eq	xine-lib
 
 %description -n DirectFB-video-xine
 This package contains video provider for DirectFB which uses XINE
