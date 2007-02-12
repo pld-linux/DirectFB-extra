@@ -4,7 +4,7 @@
 %bcond_without	mpg	# don't build support for MPG/MPEG3
 #
 Summary:	Additional providers and drivers for DirectFB
-Summary(pl):	DirectFB - dodatkowe wtyczki i sterowniki do DirectFB
+Summary(pl.UTF-8):   DirectFB - dodatkowe wtyczki i sterowniki do DirectFB
 Name:		DirectFB-extra
 Version:	0.9.25
 Release:	1
@@ -37,28 +37,28 @@ This package contains additional image/video/font providers and
 graphics/input drivers (currently Imlib2 image provider and
 OpenQuicktime video provider).
 
-%description -l pl
-Ten pakiet zawiera dodatkowe wtyczki dostarczaj±ce grafikÍ, obraz i
-fonty oraz sterowniki grafiki i wej∂ciowe (aktualnie: wtyczkÍ
-dostarczaj±c± grafikÍ poprzez Imlib2 oraz wtyczkÍ dostarczaj±c± obraz
+%description -l pl.UTF-8
+Ten pakiet zawiera dodatkowe wtyczki dostarczajƒÖce grafikƒô, obraz i
+fonty oraz sterowniki grafiki i wej≈õciowe (aktualnie: wtyczkƒô
+dostarczajƒÖcƒÖ grafikƒô poprzez Imlib2 oraz wtyczkƒô dostarczajƒÖcƒÖ obraz
 OpenQuicktime).
 
 %package -n DirectFB-image-imlib2
 Summary:	Imlib2 image provider for DirectFB
-Summary(pl):	DirectFB - wtyczka dostarczaj±ca grafikÍ poprzez Imlib2
+Summary(pl.UTF-8):   DirectFB - wtyczka dostarczajƒÖca grafikƒô poprzez Imlib2
 Group:		Libraries
 %requires_eq	DirectFB
 
 %description -n DirectFB-image-imlib2
 This package contains image provider based on Imlib2 for DirectFB.
 
-%description -n DirectFB-image-imlib2 -l pl
-Ten pakiet zawiera wtyczkÍ dla DirectFB dostarczaj±c± grafikÍ poprzez
-bibliotekÍ Imlib2.
+%description -n DirectFB-image-imlib2 -l pl.UTF-8
+Ten pakiet zawiera wtyczkƒô dla DirectFB dostarczajƒÖcƒÖ grafikƒô poprzez
+bibliotekƒô Imlib2.
 
 %package -n DirectFB-image-pnm
 Summary:	PNM image provider for DirectFB
-Summary(pl):	DirectFB - wtyczka dostarczaj±ca grafikÍ PNM
+Summary(pl.UTF-8):   DirectFB - wtyczka dostarczajƒÖca grafikƒô PNM
 Group:		Libraries
 %requires_eq	DirectFB
 
@@ -66,39 +66,39 @@ Group:		Libraries
 This package contains PNM image provider. It supports PBM, PGM and PPM
 formats (both ASCII and RAW).
 
-%description -n DirectFB-image-pnm -l pl
-Ten pakiet zawiera wtyczkÍ dla DirectFB dostarczaj±c± grafikÍ PNM.
-Obs≥uguje formaty PBM, PGM i PPM (zarÛwno ASCII, jak i binarne).
+%description -n DirectFB-image-pnm -l pl.UTF-8
+Ten pakiet zawiera wtyczkƒô dla DirectFB dostarczajƒÖcƒÖ grafikƒô PNM.
+Obs≈Çuguje formaty PBM, PGM i PPM (zar√≥wno ASCII, jak i binarne).
 
 %package -n DirectFB-image-svg
 Summary:	SVG image provider for DirectFB
-Summary(pl):	DirectFB - wtyczka dostarczaj±ca grafikÍ SVG
+Summary(pl.UTF-8):   DirectFB - wtyczka dostarczajƒÖca grafikƒô SVG
 Group:		Libraries
 %requires_eq	DirectFB
 
 %description -n DirectFB-image-svg
 This package contains SVG image provider using Cairo library.
 
-%description -n DirectFB-image-svg -l pl
-Ten pakiet zawiera wtyczkÍ dla DirectFB dostarczaj±c± grafikÍ SVG
-przy uøyciu biblioteki Cairo.
+%description -n DirectFB-image-svg -l pl.UTF-8
+Ten pakiet zawiera wtyczkƒô dla DirectFB dostarczajƒÖcƒÖ grafikƒô SVG
+przy u≈ºyciu biblioteki Cairo.
 
 %package -n DirectFB-video-ffmpeg
 Summary:	FFmpeg video provider for DirectFB
-Summary(pl):	DirectFB - wtyczka dostarczaj±ca obraz FFmpeg
+Summary(pl.UTF-8):   DirectFB - wtyczka dostarczajƒÖca obraz FFmpeg
 Group:		Libraries
 %requires_eq	DirectFB
 
 %description -n DirectFB-video-ffmpeg
 DirectFB video provider using FFmpeg codecs.
 
-%description -n DirectFB-video-ffmpeg -l pl
-Ten pakiet zawiera wtyczkÍ dla DirectFB dostarczajac± obraz przy
-uøyciu kodekÛw FFmpeg.
+%description -n DirectFB-video-ffmpeg -l pl.UTF-8
+Ten pakiet zawiera wtyczkƒô dla DirectFB dostarczajacƒÖ obraz przy
+u≈ºyciu kodek√≥w FFmpeg.
 
 %package -n DirectFB-video-libmpeg3
 Summary:	MPEG video provider for DirectFB
-Summary(pl):	DirectFB - wtyczka dostarczaj±ca obraz MPEG
+Summary(pl.UTF-8):   DirectFB - wtyczka dostarczajƒÖca obraz MPEG
 Group:		Libraries
 %requires_eq	DirectFB
 
@@ -106,13 +106,13 @@ Group:		Libraries
 This package contains MPEG (MPEG-1 and MPEG-2) video provider for
 DirectFB. It uses libmpeg3 library.
 
-%description -n DirectFB-video-libmpeg3 -l pl
-Ten pakiet zawiera wtyczkÍ dla DirectFB dostarczajac± obraz MPEG
-(MPEG-1 i MPEG-2) przy uøyciu biblioteki libmpeg3.
+%description -n DirectFB-video-libmpeg3 -l pl.UTF-8
+Ten pakiet zawiera wtyczkƒô dla DirectFB dostarczajacƒÖ obraz MPEG
+(MPEG-1 i MPEG-2) przy u≈ºyciu biblioteki libmpeg3.
 
 %package -n DirectFB-video-openquicktime
 Summary:	OpenQuicktime video provider for DirectFB
-Summary(pl):	DirectFB - wtyczka dostarczaj±ca obraz OpenQuicktime
+Summary(pl.UTF-8):   DirectFB - wtyczka dostarczajƒÖca obraz OpenQuicktime
 Group:		Libraries
 %requires_eq	DirectFB
 
@@ -120,14 +120,14 @@ Group:		Libraries
 This package contains OpenQuicktime video provider for DirectFB. It
 supports all RGB and YUV formats and does audio playback.
 
-%description -n DirectFB-video-openquicktime -l pl
-Ten pakiet zawiera wtyczkÍ dla DirectFB dostarczaj±c± obraz
-OpenQuicktime. Obs≥uguje wszystkie formaty RGB i YUV oraz odtwarza
-dºwiÍk.
+%description -n DirectFB-video-openquicktime -l pl.UTF-8
+Ten pakiet zawiera wtyczkƒô dla DirectFB dostarczajƒÖcƒÖ obraz
+OpenQuicktime. Obs≈Çuguje wszystkie formaty RGB i YUV oraz odtwarza
+d≈∫wiƒôk.
 
 %package -n DirectFB-video-swf
 Summary:	ShockWave Flash video provider for DirectFB
-Summary(pl):	DirectFB - wtyczka dostarczaj±ca obraz ShockWave Flash
+Summary(pl.UTF-8):   DirectFB - wtyczka dostarczajƒÖca obraz ShockWave Flash
 Group:		Libraries
 %requires_eq	DirectFB
 
@@ -135,13 +135,13 @@ Group:		Libraries
 This package contains SWF (ShockWave Flash) video provider for
 DirectFB. It uses flash library.
 
-%description -n DirectFB-video-swf -l pl
-Ten pakiet zawiera wtyczkÍ dla DirectFB dostarczaj±c± obraz SWF
-(ShockWave Flash) przy uøyciu biblioteki flash.
+%description -n DirectFB-video-swf -l pl.UTF-8
+Ten pakiet zawiera wtyczkƒô dla DirectFB dostarczajƒÖcƒÖ obraz SWF
+(ShockWave Flash) przy u≈ºyciu biblioteki flash.
 
 %package -n DirectFB-video-swfdec
 Summary:	ShockWave Flash video provider for DirectFB
-Summary(pl):	DirectFB - wtyczka dostarczaj±ca obraz ShockWave Flash
+Summary(pl.UTF-8):   DirectFB - wtyczka dostarczajƒÖca obraz ShockWave Flash
 Group:		Libraries
 %requires_eq	DirectFB
 
@@ -149,13 +149,13 @@ Group:		Libraries
 This package contains SWF (ShockWave Flash) video provider for
 DirectFB. It uses swfdec library.
 
-%description -n DirectFB-video-swfdec -l pl
-Ten pakiet zawiera wtyczkÍ dla DirectFB dostarczaj±c± obraz SWF
-(ShockWave Flash) przy uøyciu biblioteki swfdec.
+%description -n DirectFB-video-swfdec -l pl.UTF-8
+Ten pakiet zawiera wtyczkƒô dla DirectFB dostarczajƒÖcƒÖ obraz SWF
+(ShockWave Flash) przy u≈ºyciu biblioteki swfdec.
 
 %package -n DirectFB-video-xine
 Summary:	XINE video provider for DirectFB
-Summary(pl):	DirectFB - wtyczka dostarczaj±ca obraz XINE
+Summary(pl.UTF-8):   DirectFB - wtyczka dostarczajƒÖca obraz XINE
 Group:		Libraries
 %requires_eq	DirectFB
 %requires_eq	xine-lib
@@ -164,14 +164,14 @@ Group:		Libraries
 This package contains video provider for DirectFB which uses XINE
 library and plugins. It handles a wide range of video formats.
 
-%description -n DirectFB-video-xine -l pl
-Ten pakiet zawiera wtyczkÍ dla DirectFB dostarczaj±c± obraz przy
-uøyciu biblioteki i wtyczek XINE. Obs≥uguje szeroki zakres formatÛw
+%description -n DirectFB-video-xine -l pl.UTF-8
+Ten pakiet zawiera wtyczkƒô dla DirectFB dostarczajƒÖcƒÖ obraz przy
+u≈ºyciu biblioteki i wtyczek XINE. Obs≈Çuguje szeroki zakres format√≥w
 obrazu.
 
 %package -n xine-ui-dfb
 Summary:	DirectFB-based XINE UI
-Summary(pl):	Interfejs uøytkownika XINE oparty na DirectFB
+Summary(pl.UTF-8):   Interfejs u≈ºytkownika XINE oparty na DirectFB
 Group:		Applications/Multimedia
 %requires_eq	DirectFB
 Requires:	xine-lib >= 2:1.0-0.rc3
@@ -180,9 +180,9 @@ Requires:	xine-lib >= 2:1.0-0.rc3
 DirectFB-based XINE UI. This package contains also DirectFB video
 output plugin for XINE.
 
-%description -n xine-ui-dfb -l pl
-Interfejs uøytkownika XINE oparty na DirectFB. Zawiera takøe wtyczkÍ
-wyj∂cia obrazu DirectFB dla XINE.
+%description -n xine-ui-dfb -l pl.UTF-8
+Interfejs u≈ºytkownika XINE oparty na DirectFB. Zawiera tak≈ºe wtyczkƒô
+wyj≈õcia obrazu DirectFB dla XINE.
 
 %prep
 %setup -q
