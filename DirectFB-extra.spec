@@ -100,6 +100,7 @@ Summary:	FFmpeg video provider for DirectFB
 Summary(pl):	DirectFB - wtyczka dostarczaj±ca obraz przez FFmpeg
 Group:		Libraries
 %requires_eq	DirectFB
+%requires_eq	FusionSound
 
 %description -n DirectFB-video-ffmpeg
 This package contains video provider for DirectFB using FFmpeg codecs.
