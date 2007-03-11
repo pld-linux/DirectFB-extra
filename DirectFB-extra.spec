@@ -10,7 +10,7 @@ Version:	1.0.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://www.directfb.org/download/DirectFB-extra/%{name}-%{version}.tar.gz
+Source0:	http://www.directfb.org/downloads/Extras/%{name}-%{version}.tar.gz
 # Source0-md5:	2d744ad06139640857b988d244275235
 Patch0:		%{name}-acfix.patch
 Patch1:		%{name}-mpeg3_open.patch
