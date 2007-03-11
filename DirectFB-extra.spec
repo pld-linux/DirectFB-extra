@@ -6,18 +6,19 @@
 Summary:	Additional providers and drivers for DirectFB
 Summary(pl.UTF-8):	DirectFB - dodatkowe wtyczki i sterowniki do DirectFB
 Name:		DirectFB-extra
-Version:	0.9.25
+Version:	1.0.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://www.directfb.org/download/DirectFB-extra/%{name}-%{version}.tar.gz
-# Source0-md5:	2acb95b87adf0feefd282ac29cd72ab2
+# Source0-md5:	2d744ad06139640857b988d244275235
 Patch0:		%{name}-acfix.patch
+Patch1:		%{name}-mpeg3_open.patch
 URL:		http://www.directfb.org/
 BuildRequires:	DirectFB-devel >= 1:%{version}
+BuildRequires:	FusionSound-devel >= 0.9.25
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	FusionSound-devel >= 0.9.25
 BuildRequires:	ffmpeg-devel
 %{?with_flash:BuildRequires:	gplflash-devel >= 0.4.10-5}
 BuildRequires:	imlib2-devel
@@ -42,6 +43,18 @@ Ten pakiet zawiera dodatkowe wtyczki dostarczające grafikę, obraz i
 fonty oraz sterowniki grafiki i wejściowe (aktualnie: wtyczkę
 dostarczającą grafikę poprzez Imlib2 oraz wtyczkę dostarczającą obraz
 OpenQuicktime).
+
+%package -n DirectFB-image-bmp
+Summary:       BMP image provider for DirectFB
+Summary(pl.UTF-8):   DirectFB - wtyczka dostarczająca grafikę BMP
+Group:         Libraries
+%requires_eq   DirectFB
+
+%description -n DirectFB-image-bmp
+This package contains BMP mage provider for DirectFB.
+
+%description -n DirectFB-image-bmp -l pl.UTF-8
+Ten pakiet zawiera wtyczkę dla DirectFB dostarczającą grafikę BMP.
 
 %package -n DirectFB-image-imlib2
 Summary:	Imlib2 image provider for DirectFB
@@ -80,14 +93,15 @@ Group:		Libraries
 This package contains SVG image provider using Cairo library.
 
 %description -n DirectFB-image-svg -l pl.UTF-8
-Ten pakiet zawiera wtyczkę dla DirectFB dostarczającą grafikę SVG
-przy użyciu biblioteki Cairo.
+Ten pakiet zawiera wtyczkę dla DirectFB dostarczającą grafikę SVG przy
+użyciu biblioteki Cairo.
 
 %package -n DirectFB-video-ffmpeg
 Summary:	FFmpeg video provider for DirectFB
 Summary(pl.UTF-8):	DirectFB - wtyczka dostarczająca obraz FFmpeg
 Group:		Libraries
 %requires_eq	DirectFB
+%requires_eq	FusionSound
 
 %description -n DirectFB-video-ffmpeg
 DirectFB video provider using FFmpeg codecs.
@@ -187,6 +201,7 @@ wyjścia obrazu DirectFB dla XINE.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -197,8 +212,9 @@ wyjścia obrazu DirectFB dla XINE.
 CPPFLAGS="-I/usr/include/libmpeg3"
 %configure \
 	--disable-avifile \
-	%{!?with_flash:--disable-flash} \
-	%{!?with_mpg:--disable-libmpeg3} \
+	%{?with_flash:--enable-flash} \
+	%{?with_mpg:--enable-libmpeg3} \
+	--enable-openquicktime \
 	--enable-svg \
 	--enable-swfdec
 
@@ -218,6 +234,11 @@ rm -f $RPM_BUILD_ROOT%{dfbdir}/interfaces/*/*.la \
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%files -n DirectFB-image-bmp
+%defattr(644,root,root,755)
+%doc ChangeLog README
+%attr(755,root,root) %{dfbdir}/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_bmp.so
+
 %files -n DirectFB-image-imlib2
 %defattr(644,root,root,755)
 %doc ChangeLog README
@@ -233,11 +254,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc ChangeLog README
 %attr(755,root,root) %{dfbdir}/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_svg.so
 
-%files -n DirectFB-video-openquicktime
-%defattr(644,root,root,755)
-%doc ChangeLog README
-%attr(755,root,root) %{dfbdir}/interfaces/IDirectFBVideoProvider/libidirectfbvideoprovider_openquicktime.so
-
 %files -n DirectFB-video-ffmpeg
 %defattr(644,root,root,755)
 %doc ChangeLog README
@@ -249,6 +265,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc ChangeLog README
 %attr(755,root,root) %{dfbdir}/interfaces/IDirectFBVideoProvider/libidirectfbvideoprovider_libmpeg3.so
 %endif
+
+%files -n DirectFB-video-openquicktime
+%defattr(644,root,root,755)
+%doc ChangeLog README
+%attr(755,root,root) %{dfbdir}/interfaces/IDirectFBVideoProvider/libidirectfbvideoprovider_openquicktime.so
 
 %if %{with flash}
 %files -n DirectFB-video-swf
