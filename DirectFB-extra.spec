@@ -45,10 +45,10 @@ dostarczającą grafikę poprzez Imlib2 oraz wtyczkę dostarczającą obraz
 OpenQuicktime).
 
 %package -n DirectFB-image-bmp
-Summary:       BMP image provider for DirectFB
-Summary(pl.UTF-8):   DirectFB - wtyczka dostarczająca grafikę BMP
-Group:         Libraries
-%requires_eq   DirectFB
+Summary:	BMP image provider for DirectFB
+Summary(pl.UTF-8):	DirectFB - wtyczka dostarczająca grafikę BMP
+Group:		Libraries
+%requires_eq	DirectFB
 
 %description -n DirectFB-image-bmp
 This package contains BMP mage provider for DirectFB.
