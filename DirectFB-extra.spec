@@ -7,7 +7,7 @@ Summary:	Additional providers and drivers for DirectFB
 Summary(pl):	DirectFB - dodatkowe wtyczki i sterowniki do DirectFB
 Name:		DirectFB-extra
 Version:	1.0.0
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://www.directfb.org/download/DirectFB-extra/%{name}-%{version}.tar.gz
