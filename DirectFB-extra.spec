@@ -2,16 +2,22 @@
 # Conditional build:
 %bcond_without	flash	# don't build FLASH video provider
 %bcond_without	mpg	# don't build support for MPG/MPEG3
+%bcond_without	swfdec	# don't build swfdec video provider
 #
+# broken currently (needs update for DirectFB 1.2.x)
+%undefine	with_flash
+# needs update for swfdec 0.6.x
+%undefine	with_swfdec
 Summary:	Additional providers and drivers for DirectFB
 Summary(pl.UTF-8):	DirectFB - dodatkowe wtyczki i sterowniki do DirectFB
 Name:		DirectFB-extra
-Version:	1.0.0
-Release:	1
+Version:	1.2.0
+%define	subver	rc1
+Release:	0.%{subver}.0.1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://www.directfb.org/downloads/Extras/%{name}-%{version}.tar.gz
-# Source0-md5:	2d744ad06139640857b988d244275235
+Source0:	http://www.directfb.org/downloads/Extras/%{name}-%{version}-%{subver}.tar.gz
+# Source0-md5:	c3c160c167c20f320b0c0562168d0579
 Patch0:		%{name}-acfix.patch
 Patch1:		%{name}-mpeg3_open.patch
 URL:		http://www.directfb.org/
@@ -22,13 +28,14 @@ BuildRequires:	automake
 BuildRequires:	ffmpeg-devel
 %{?with_flash:BuildRequires:	gplflash-devel >= 0.4.10-5}
 BuildRequires:	imlib2-devel
+BuildRequires:	jasper-devel
 %{?with_mpg:BuildRequires:	libmpeg3-devel}
 BuildRequires:	libsvg-cairo-devel >= 0.1.6
 BuildRequires:	libtool
 BuildRequires:	openquicktime-devel
 BuildRequires:	pkgconfig >= 1:0.9
-BuildRequires:	swfdec-devel >= 0.3.0
-BuildRequires:	xine-lib-devel >= 2:1.0-0.rc3
+%{?with_swfdec:BuildRequires:	swfdec-devel >= 0.5.0}
+BuildRequires:	xine-lib-devel >= 2:1.0.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		dfbdir		%(pkg-config --variable=moduledir directfb-internal)
@@ -68,6 +75,31 @@ This package contains image provider based on Imlib2 for DirectFB.
 %description -n DirectFB-image-imlib2 -l pl.UTF-8
 Ten pakiet zawiera wtyczkę dla DirectFB dostarczającą grafikę poprzez
 bibliotekę Imlib2.
+
+%package -n DirectFB-image-jpeg2000
+Summary:	JPEG-2000 image provider for DirectFB
+Summary(pl.UTF-8):	DirectFB - wtyczka dostarczająca grafikę JPEG-2000
+Group:		Libraries
+%requires_eq	DirectFB
+
+%description -n DirectFB-image-jpeg2000
+This package contains JPEG-2000 image provider.
+
+%description -n DirectFB-image-jpeg2000 -l pl.UTF-8
+Ten pakiet zawiera wtyczkę dla DirectFB dostarczającą grafikę
+JPEG-2000.
+
+%package -n DirectFB-image-mpeg2
+Summary:	MPEG-2 image provider for DirectFB
+Summary(pl.UTF-8):	DirectFB - wtyczka dostarczająca grafikę MPEG-2
+Group:		Libraries
+%requires_eq	DirectFB
+
+%description -n DirectFB-image-mpeg2
+This package contains MPEG-2 image provider.
+
+%description -n DirectFB-image-mpeg2 -l pl.UTF-8
+Ten pakiet zawiera wtyczkę dla DirectFB dostarczającą grafikę MPEG-2.
 
 %package -n DirectFB-image-pnm
 Summary:	PNM image provider for DirectFB
@@ -199,7 +231,7 @@ Interfejs użytkownika XINE oparty na DirectFB. Zawiera także wtyczkę
 wyjścia obrazu DirectFB dla XINE.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-%{subver}
 %patch0 -p1
 %patch1 -p1
 
@@ -215,10 +247,10 @@ CPPFLAGS="-I/usr/include/libmpeg3"
 	%{?with_flash:--enable-flash} \
 	%{?with_mpg:--enable-libmpeg3} \
 	--enable-openquicktime \
-	--enable-svg \
-	--enable-swfdec
+	%{!?with_swfdec:--disable-swfdec}
 
 %{__make} \
+	FFMPEG_CFLAGS="-I/usr/include/libavcodec -I/usr/include/libavformat" \
 	MODULEDIR=%{dfbdir}
 
 %install
@@ -243,6 +275,16 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog README
 %attr(755,root,root) %{dfbdir}/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_imlib2.so
+
+%files -n DirectFB-image-jpeg2000
+%defattr(644,root,root,755)
+%doc ChangeLog README
+%attr(755,root,root) %{dfbdir}/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_jpeg2000.so
+
+%files -n DirectFB-image-mpeg2
+%defattr(644,root,root,755)
+%doc ChangeLog README
+%attr(755,root,root) %{dfbdir}/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_mpeg2.so
 
 %files -n DirectFB-image-pnm
 %defattr(644,root,root,755)
@@ -278,10 +320,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{dfbdir}/interfaces/IDirectFBVideoProvider/libidirectfbvideoprovider_swf.so
 %endif
 
+%if %{with swfdec}
 %files -n DirectFB-video-swfdec
 %defattr(644,root,root,755)
 %doc ChangeLog README
 %attr(755,root,root) %{dfbdir}/interfaces/IDirectFBVideoProvider/libidirectfbvideoprovider_swfdec.so
+%endif
 
 %files -n DirectFB-video-xine
 %defattr(644,root,root,755)
