@@ -22,7 +22,7 @@ Patch0:		%{name}-acfix.patch
 Patch1:		%{name}-mpeg3_open.patch
 URL:		http://www.directfb.org/
 BuildRequires:	DirectFB-devel >= 1:%{version}
-BuildRequires:	FusionSound-devel >= 0.9.25
+BuildRequires:	FusionSound-devel >= 1.1.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	ffmpeg-devel
