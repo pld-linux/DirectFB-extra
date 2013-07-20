@@ -1,3 +1,4 @@
+# NOTE: versions >= 1.7.0 have been integrated into DirectFB.spec
 #
 # Conditional build:
 %bcond_without	flash	# don't build FLASH video provider
